@@ -3,7 +3,7 @@ package org.acme;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Table(name = "movies")
+@Table(name = "movies", uniqueConstraints = @UniqueConstraint(columnNames={"imdbId"}))
 @Entity
 public class Movie implements Serializable {
     private Long id; 
@@ -21,6 +21,11 @@ public class Movie implements Serializable {
     */
 
     public Movie() {
+    }
+
+    public Movie(Long id, String imdbId) {
+        this.id = id;
+        this.imdbId = imdbId;
     }
 
     public Movie(Long id, String imdbId, String title, String genre, int year, String description) {
@@ -85,6 +90,12 @@ public class Movie implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie [id=" + id + ", imdbId=" + imdbId + ", title=" + title + ", genre=" + genre + ", year=" + year
+                + ", description=" + description + "]";
     }
 
     

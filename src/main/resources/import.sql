@@ -14,9 +14,9 @@ insert into movies (id, imdbId, title, genre, year, description)
 insert into movies (id, imdbId, title, genre, year, description) 
     values( 
         nextval('hibernate_sequence'), 
-        'tt0993847',
-        'The saw 4',
-        'Horror',
-        2014,
-        'Very scary.'
+        'tt1320253',
+        'The Expendables',
+        'Action',
+        2010,
+        'A CIA operative hires a team of mercenaries to eliminate a Latin dictator and a renegade CIA agent.'
         );
