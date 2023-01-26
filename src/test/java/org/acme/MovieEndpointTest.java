@@ -19,6 +19,26 @@ public class MovieEndpointTest {
           .then()
              .statusCode(200);
     }
+    
+    // movies page 1
+    @Test
+    public void testMoviesEndpoint_Paged_GET_1() {
+        given()
+          .when().get("/movies/paged?page=1&results=5")
+          .then()
+             .statusCode(200)
+             .body("size()", is(5));
+    }
+    
+    // movies page 2
+    @Test
+    public void testMoviesEndpoint_Paged_GET_2() {
+        given()
+          .when().get("/movies/paged?page=2&results=5")
+          .then()
+             .statusCode(200)
+             .body("size()", is(2));
+    }
 
     // Normal query
     @Test
