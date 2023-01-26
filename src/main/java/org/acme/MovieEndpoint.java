@@ -20,6 +20,16 @@ public class MovieEndpoint {
         return movieResource.getMovies();
     }
 
+    // curl -X GET http://localhost:8080/movies/paged?page=1&results=5
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/paged")
+    public List<Movie> getMoviesWithPagination(
+        @QueryParam("page") @DefaultValue("1") int page,
+        @QueryParam("results") @DefaultValue("10") int results) {
+        return movieResource.getMoviesWithPagination(page, results);
+    }
+
     // curl -X GET http://localhost:8080/movies/tt0993846
     @GET
     @Path("/{imdbId}")

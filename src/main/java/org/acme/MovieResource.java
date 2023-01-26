@@ -18,6 +18,41 @@ public class MovieResource {
         return entityManager.createQuery("SELECT m FROM Movie m").getResultList();
     }
 
+    public List<Movie> getMoviesWithPagination(int page, int results) {
+        List<Movie> movie_list = getMovies();
+        int list_size = movie_list.size();
+
+        int true_results = results;
+        int true_page = page;
+
+        // A little bit of validation
+        if(results > 250) {
+            true_results = list_size;
+        } else if(results < 1) {
+            true_results = 1;
+        }
+
+        int total_pages = (int)Math.ceil((double)list_size/(double)true_results);
+
+        // A little bit of validation
+        if(page > total_pages) {
+            true_page = total_pages;
+        } else if(page < 1) {
+            true_page = 1;
+        }
+        
+        int true_offset=(true_page*true_results)-true_results;
+        int true_limit=true_results;
+
+        int remainder = ((total_pages*true_results)-list_size);
+
+        if(true_page == total_pages) {
+            true_limit = true_results - remainder;
+        }
+
+        return movie_list.subList(true_offset, true_offset+true_limit);
+    }
+
     public Movie getMovie(String imdbId) {
         return (Movie)entityManager.createQuery("SELECT m FROM Movie m WHERE m.imdbId = :imdbId1").setParameter("imdbId1", imdbId).getSingleResult();
     }
