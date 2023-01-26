@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Singleton
 public class MovieResource {
@@ -51,6 +52,23 @@ public class MovieResource {
         }
 
         return movie_list.subList(true_offset, true_offset+true_limit);
+    }
+
+    public List<Movie> getMoviesSearch(String keyword) { 
+        List<Movie> result = getMovies().stream()
+                .filter(item -> {
+                    if( item.getTitle().toLowerCase().contains(keyword.toLowerCase()) ||
+                        item.getDescription().toLowerCase().contains(keyword.toLowerCase()) ||
+                        item.getGenre().toLowerCase().contains(keyword.toLowerCase()) ||
+                        item.getImdbId().toLowerCase().contains(keyword.toLowerCase())
+                        ) {
+                        return true;
+                    }
+                    return false;
+                })
+                .collect(Collectors.toList());
+
+        return result;
     }
 
     public Movie getMovie(String imdbId) {

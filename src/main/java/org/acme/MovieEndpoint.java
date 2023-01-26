@@ -30,6 +30,14 @@ public class MovieEndpoint {
         return movieResource.getMoviesWithPagination(page, results);
     }
 
+    // curl -X GET http://localhost:8080/movies/search/wolf of
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/search/{keyword}")
+    public List<Movie> getMoviesSearch(@PathParam("keyword") String keyword) {
+        return movieResource.getMoviesSearch(keyword);
+    }
+
     // curl -X GET http://localhost:8080/movies/tt0993846
     @GET
     @Path("/{imdbId}")
