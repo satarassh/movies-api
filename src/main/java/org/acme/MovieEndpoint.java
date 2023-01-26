@@ -67,7 +67,7 @@ public class MovieEndpoint {
         return Response.status(Response.Status.OK).type(MediaType.TEXT_PLAIN_TYPE).entity("Movie with imdbId="+m.getImdbId()+" added successfully.").build();
     }
 
-    // curl -X DELETE http://localhost:8080/movies/tt0993846
+    // curl -X DELETE http://localhost:8080/movies/tt0333701
     @DELETE
     @Path("/{imdbId}")
     public Response deleteMovie(@PathParam("imdbId") String imdbId) {

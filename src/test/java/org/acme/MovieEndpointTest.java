@@ -27,7 +27,7 @@ public class MovieEndpointTest {
           .when().get("/movies/tt0993846")
           .then()
              .statusCode(200)
-             .body("size()", is(6))
+             .body("size()", is(7))
              .body("title", equalTo("The Wolf of Wall Street"));
     }
 
@@ -64,7 +64,7 @@ public class MovieEndpointTest {
     @Test
     public void testMoviesEndpoint_POST_1() {
         given().contentType(ContentType.JSON)
-          .body("{\"imdbId\":\"tt0333701\",\"title\":\"Kajmak i marmelada\",\"genre\":\"Comedy\",\"year\":2003,\"description\":\"A story about a couple from the bottom of the social ladder.\"}")
+          .body("{\"imdbId\":\"tt0333701\",\"title\":\"Kajmak in marmelada\",\"genre\":\"Comedy\",\"year\":2003,\"description\":\"A story about a couple from the bottom of the social ladder.\"}")
           .when().post("/movies")
           .then()
              .statusCode(200);
@@ -74,7 +74,7 @@ public class MovieEndpointTest {
     @Test
     public void testMoviesEndpoint_POST_2() {
         given().contentType(ContentType.JSON)
-          .body("{\"imdbId\":\"tt0993846\",\"title\":\"Kajmak i marmelada\",\"genre\":\"Drama\",\"year\":2003,\"description\":\"A story about a couple from the bottom of the social ladder.\"}")
+          .body("{\"imdbId\":\"tt0993846\",\"title\":\"Kajmak in marmelada\",\"genre\":\"Drama\",\"year\":2003,\"description\":\"A story about a couple from the bottom of the social ladder.\"}")
           .when().post("/movies")
           .then()
              .statusCode(400);

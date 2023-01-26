@@ -20,3 +20,25 @@ insert into movies (id, imdbId, title, genre, year, description)
         2010,
         'A CIA operative hires a team of mercenaries to eliminate a Latin dictator and a renegade CIA agent.'
         );
+
+insert into pictures (id, url, movie_id) 
+   values( 
+        nextval('hibernate_sequence'),
+        'https://flxt.tmsimg.com/assets/p9991602_k_v13_ab.jpg',
+        'tt0993846'
+        );
+
+insert into pictures (id, url, movie_id) 
+   values( 
+        nextval('hibernate_sequence'),
+        'https://flxt.tmsimg.com/assets/p9991602_k_h9_ab.jpg',
+        'tt0993846'
+        );
+
+insert into pictures (id, url, movie_id) 
+   values( 
+        nextval('hibernate_sequence'),
+        'https://flxt.tmsimg.com/assets/p3546099_p_v8_bc.jpg',
+        'tt1320253'
+        );
+       

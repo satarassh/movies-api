@@ -37,6 +37,7 @@ public class MovieResource {
             if (movie.getYear() != 0) movie_update.setYear(movie.getYear());
             if (movie.getDescription() != null) movie_update.setDescription(movie.getDescription());
             if (movie.getGenre() != null) movie_update.setGenre(movie.getGenre());
+            if (movie.getPictures() != null) movie_update.setPictures(movie.getPictures());
         } else {
             throw new RuntimeException("No movie can be found");
         }

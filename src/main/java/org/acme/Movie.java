@@ -2,42 +2,35 @@ package org.acme;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Table(name = "movies", uniqueConstraints = @UniqueConstraint(columnNames={"imdbId"}))
 @Entity
 public class Movie implements Serializable {
     private Long id; 
-    private String imdbId; /* tt0993846 */ 
-    private String title; /* The Wolf of Wall Street */ 
-    private String genre; /* "Comedy" */
-    private int year; /* 2013 */
-    //private ArrayList<String> pictures; /* ["https://flxt.tmsimg.com/assets/p9991602_k_v13_ab.jpg","https://flxt.tmsimg.com/assets/p9991602_k_h9_ab.jpg"] */
+
+    private String imdbId;
+
+    private List<Picture> pictures;
+
+    private String title;
+    private String genre;
+    private int year;
     private String description; 
-    /*  
-        "Based on the true story of Jordan Belfort, 
-        from his rise to a wealthy stock-broker living 
-        the high life to his fall involving crime, 
-        corruption and the federal government."
-    */
 
     public Movie() {
     }
 
-    public Movie(Long id, String imdbId) {
+    public Movie(Long id, String imdbId, List<Picture> pictures, String title, String genre, int year, String description) {
         this.id = id;
         this.imdbId = imdbId;
-    }
-
-    public Movie(Long id, String imdbId, String title, String genre, int year, String description) {
-        this.id = id;
-        this.imdbId = imdbId;
+        this.pictures = pictures;
         this.title = title;
         this.genre = genre;
         this.year = year;
         this.description = description;
     }
 
-    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
@@ -47,6 +40,7 @@ public class Movie implements Serializable {
         this.id = id;
     }
 
+    @Id
     @Column(name = "imdbId")
     public String getImdbId() {
         return imdbId;
@@ -92,11 +86,18 @@ public class Movie implements Serializable {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "Movie [id=" + id + ", imdbId=" + imdbId + ", title=" + title + ", genre=" + genre + ", year=" + year
-                + ", description=" + description + "]";
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="movie")
+    public List<Picture> getPictures() {
+        return pictures;
     }
 
-    
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie [id=" + id + ", imdbId=" + imdbId + ", pictures=" + pictures + ", title=" + title + ", genre="
+                + genre + ", year=" + year + ", description=" + description + "]";
+    }
 }
